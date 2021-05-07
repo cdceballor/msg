@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="https://www.thymeleaf.org">
+
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Insert title here</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div class="container md-8">
+        <form action="/listPeople" class="form-inline" method="GET">
+            <div class="form-group mb-2">
+                <input type="text" class="form-control" name="name" placeholder="Search" />
+                <input type="submit" value="Search" class="btn btn-primary" />
+
+            </div>
+        </form>
+        <table class="table">
+            <a th:href="@{/new}" class="btn btn-primary">Add users</a>
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">NAME</th>
+                    <th scope="col">CONTRACT TYPE</th>
+                    <th scope="col">ROLE ID</th>
+                    <th scope="col">ROLE NAME</th>
+                    <th scope="col">ROLE DESCRIPTION</th>
+                    <th scope="col">HOURLY SALARY</th>
+                    <th scope="col">MONTHLY SALARY</th>
+                    <th scope="col">RESULT</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="people:${people}">
+                    <td th:text="${people.id}"></td>
+                    <td th:text="${people.name}"></td>
+                    <td th:text="${people.contractTypeName}"></td>
+                    <td th:text="${people.roleId}"></td>
+                    <td th:text="${people.roleName}"></td>
+                    <td th:text="${people.roleDescription}"></td>
+                    <td th:text="${people.hourlySalary}"></td>
+                    <td th:text="${people.monthlySalary}"></td>
+                    <td th:text="${people.result}"></td>
+                    <td>
+                        <a th:href="@{/edit/}+${people.id}" class="btn btn-warning">Edit</a>
+                        <a th:onclick="d([[${people.id}]])" class="btn btn-danger">Delete</a>
+                        <!--<a th:onclick="gpdf([[${people.id}]])" class="btn btn-primary">Generate PDF</a>-->
+                </tr>
+            </tbody>
+        </table>
+        <a th:href="@{/product}" class="btn btn-success">Go back</a>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.js "></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js "></script>
+    <script src="functions.js "></script>
+</body>
+
+</html>
